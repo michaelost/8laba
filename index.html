@@ -8,9 +8,15 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"></script>
 
+
+
+
+
+
 <script>
 	$(document).ready(function(){
 
+		Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
 
 		$.ajax({
 			method : "GET",
@@ -36,13 +42,24 @@
 				});
 				show(topics);
 
+
+
+
+
+
 		}
 
 		
 
 
 		 });
-				function show(topics){
+				
+
+				 function show(topics){
+
+
+
+				 	
 						
 				 var v1,v2,v3,ran = Math.floor((Math.random() * topics.length) + 0);
 				 		while (v1 == v2 || v2 == v3 || v1 == v3){
@@ -52,15 +69,43 @@
 				 		}
 				 		var ar = Array(v1,v2,v3);
 				 		ar.forEach(function(ran){
-						$('body').append("<div class='title'>"+topics[ran].title+"</div>")
-				 		.append("<div class='body'>"+topics[ran].body+"</div>")
-				 		.append("<div class='topic_id'>"+topics[ran].topic_id+"</div>");
-							
-				 		});
-				 		
-							
 
-				}
+						$('body')
+						.append("<div class='title'>"+topics[ran].title+"</div>")
+				 		.append("<div class='body'>"+topics[ran].body+"</div>")
+				 		.append("<div class='topic_id'>"+topics[ran].topic_id+"</div>")
+				 		
+				 		});
+				 	
+				 	var k =0,v4=Math.floor((Math.random() * topics.length) + 0);
+				 		$('body')
+						.append("<div class='title'>"+topics[ran].title+"</div>");
+				 	
+				 		
+					setInterval(function(){
+
+								$('body')
+						.append("<div class='title'>"+topics[v4].title+"</div>")
+				 		.append("<div class='body'>"+topics[v4].body+"</div>")
+				 		.append("<div class='topic_id'>"+topics[v4].topic_id+"</div>");
+				 	
+				 	 v4 = Math.floor((Math.random() * topics.length) + 0)
+				 	  var titles =	$('div.title').toArray(),
+				 	  	  body = $('div.body').toArray(),
+				 	  	  topic_id = $('div.topic_id').toArray();
+				 			  $(titles[k]).css('display','none');
+				 	 			$(body[k]).css('display','none');
+								$(topic_id[k]).css('display','none');
+
+				 	  k++;
+					},1000);
+				 	
+				 	}
+
+				 	
+							
+				
+				
 			
 });
 
