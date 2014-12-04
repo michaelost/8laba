@@ -18,7 +18,13 @@
 			dataType: 'json',
 			success: function(data){
 				
-				console.log(data.body);
+				console.log(data);
+				console.log("================");
+				console.log(data[0]);
+			
+				console.log(typeof(data[0]));
+				var obj = JSON.parse(data[0]);
+				console.log(obj);	
 		}
 		 });
 

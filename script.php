@@ -17,7 +17,6 @@ $opa = json_encode($row3);
 array_push($mass, $opa);
 }
  			 
-
-echo "dadas";
-echo $mass[5];
+ $m = json_encode($mass);
+echo $m;
 ?>
