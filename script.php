@@ -2,21 +2,11 @@
 header('Content-Type: application/json');
  $db = mysql_connect ("localhost","root","123qweasdzxcv");
  mysql_select_db("laba",$db);
-
- $query3 = "SELECT * FROM topic";
-$result3 = mysql_query($query3,$db);
-/*
-$row3 = mysql_fetch_array($result3,MYSQL_ASSOC);
-*/
-
- $mass =array();
-
-for($i = 0; $i<mysql_num_rows($result3);$i++){
-$row3 = mysql_fetch_array($result3,MYSQL_ASSOC);
-$opa = json_encode($row3);
-array_push($mass, $opa);
-}
- 			 
- $m = json_encode($mass);
-echo $m;
+$first = $_POST['first'];
+$second = $_POST['second'];
+$isfirst= $_POST['isfirst'];
+$query = "SELECT * FROM topic WHERE topic_id <> '".$first."' AND topic_id <> '".$second."' ORDER BY RAND() LIMIT 20";
+$res  = mysql_query($query,$db);
+$result = mysql_fetch_array($res,MYSQL_ASSOC);
+echo json_encode($result,true);
 ?>

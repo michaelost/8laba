@@ -9,102 +9,82 @@
 <script src="http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"></script>
 
 
+<style>
+	
+	.title,.body,.topic_id{
+		background: rgba(0,0,0,0.5);
+		color: white;
+		font-size: 30px;
+		font-family: Arial;
+		border:  1px solid black;
+		text-align: center;
+	}
+	.title{
+	margin-top:10px;
+	}
+	.title:hover,.body:hover,.topic_id:hover{
+		background: rgba(0,0,0,0.9);
+		cursor: pointer;
+		
+		
+	}
 
-
-
+</style>
 
 <script>
 	$(document).ready(function(){
 
-		Array.prototype.remove = function(v) { this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1); }
+		var 
 
-		$.ajax({
-			method : "GET",
+			first = Math.floor((Math.random() * 1) + 100),
+			second = Math.floor((Math.random() * 1) + 100),
+			k = 1;
+		
+
+			setInterval(function(){
+					$.ajax({
+			method : "POST",
+			data: {
+				first : first,
+				second: second, 
+				isfirst: "true"
+					},
 			url: "script.php",
 			dataType: 'json',
 			success: function(data){
 				/*
-				console.log(data);
-				console.log("================");
-				console.log(data[0]);
-			
-				console.log(typeof(data[0]));
-				*/
-				var obj = JSON.parse(data[0]);
-				var topics = new Array();
-				console.log(obj.body);	
-				for (i =0, j=data.length; i<j;i++){
-					topics[i] = JSON.parse(data[i]);
+				var obj = JSON.parse(data);
+			*/
+					
+						$('body')
+						.append("<div class='title'>"+data.title+"</div>")
+				 		.append("<div class='body'>"+data.body+"</div>")
+				 		.append("<div class='topic_id'>"+data.topic_id+"</div>")
+					
+						if (k >3){
+					var	 titles =	$("div.title").toArray(),
+						 bodyes = $("div.body").toArray(),
+						 topics_id = $("div.topic_id").toArray();
+
+						 $(titles[k-4]).css('display','none');
+						 $(bodyes[k-4]).css('display','none');
+						 $(topics_id[k-4]).css('display','none');
+						 
+						}
+
+					var next = data.topic_id;
+						
+						second = first;
+							first = next;
+							k++;
+
 				}
-				
-				topics.forEach(function(topic){
-					console.log(topic.body);
-				});
-				show(topics);
-
-
-
-
-
-
-		}
-
-		
-
 
 		 });
-				
 
-				 function show(topics){
+			},1000);
+		
 
-
-
-				 	
-						
-				 var v1,v2,v3,ran = Math.floor((Math.random() * topics.length) + 0);
-				 		while (v1 == v2 || v2 == v3 || v1 == v3){
-				 			v1 = Math.floor((Math.random() * topics.length) + 0);
-				 			v2 = Math.floor((Math.random() * topics.length) + 0);
-				 			v3 = Math.floor((Math.random() * topics.length) + 0);
-				 		}
-				 		var ar = Array(v1,v2,v3);
-				 		ar.forEach(function(ran){
-
-						$('body')
-						.append("<div class='title'>"+topics[ran].title+"</div>")
-				 		.append("<div class='body'>"+topics[ran].body+"</div>")
-				 		.append("<div class='topic_id'>"+topics[ran].topic_id+"</div>")
-				 		
-				 		});
-				 	
-				 	var k =0,v4=Math.floor((Math.random() * topics.length) + 0);
-				 		$('body')
-						.append("<div class='title'>"+topics[ran].title+"</div>");
-				 	
-				 		
-					setInterval(function(){
-
-								$('body')
-						.append("<div class='title'>"+topics[v4].title+"</div>")
-				 		.append("<div class='body'>"+topics[v4].body+"</div>")
-				 		.append("<div class='topic_id'>"+topics[v4].topic_id+"</div>");
-				 	
-				 	 v4 = Math.floor((Math.random() * topics.length) + 0)
-				 	  var titles =	$('div.title').toArray(),
-				 	  	  body = $('div.body').toArray(),
-				 	  	  topic_id = $('div.topic_id').toArray();
-				 			  $(titles[k]).css('display','none');
-				 	 			$(body[k]).css('display','none');
-								$(topic_id[k]).css('display','none');
-
-				 	  k++;
-					},1000);
-				 	
-				 	}
-
-				 	
-							
-				
 				
 			
 });
