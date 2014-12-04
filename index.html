@@ -17,17 +17,50 @@
 			url: "script.php",
 			dataType: 'json',
 			success: function(data){
-				
+				/*
 				console.log(data);
 				console.log("================");
 				console.log(data[0]);
 			
 				console.log(typeof(data[0]));
+				*/
 				var obj = JSON.parse(data[0]);
-				console.log(obj);	
-		}
-		 });
+				var topics = new Array();
+				console.log(obj.body);	
+				for (i =0, j=data.length; i<j;i++){
+					topics[i] = JSON.parse(data[i]);
+				}
+				
+				topics.forEach(function(topic){
+					console.log(topic.body);
+				});
+				show(topics);
 
+		}
+
+		
+
+
+		 });
+				function show(topics){
+						
+				 var v1,v2,v3,ran = Math.floor((Math.random() * topics.length) + 0);
+				 		while (v1 == v2 || v2 == v3 || v1 == v3){
+				 			v1 = Math.floor((Math.random() * topics.length) + 0);
+				 			v2 = Math.floor((Math.random() * topics.length) + 0);
+				 			v3 = Math.floor((Math.random() * topics.length) + 0);
+				 		}
+				 		var ar = Array(v1,v2,v3);
+				 		ar.forEach(function(ran){
+						$('body').append("<div class='title'>"+topics[ran].title+"</div>")
+				 		.append("<div class='body'>"+topics[ran].body+"</div>")
+				 		.append("<div class='topic_id'>"+topics[ran].topic_id+"</div>");
+							
+				 		});
+				 		
+							
+
+				}
 			
 });
 
@@ -36,7 +69,7 @@
 </script>
 
 </head>
-<body>dasadsadsassad
+<body>
 </body>
 
 
